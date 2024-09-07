@@ -10,32 +10,32 @@ authoritative;
 
 # Each subnet block defines a distinct domain's scope.
 
-# Subnet for domain1 (e.g., domain1.com):
+# Subnet for lab (e.g., lab.com):
 subnet {{ dhcp_subnet_1 }} netmask {{ dhcp_netmask_1 }} {
     range {{ dhcp_range_start_1 }} {{ dhcp_range_end_1 }};
     option routers {{ dhcp_router_1 }};
-    option domain-name "domain1.com";
+    option domain-name "lab.com";
 }
 
-# Subnet for domain2 (e.g., domain2.com):
+# Subnet for ocp-clust (e.g., ocp-clust.com):
 subnet {{ dhcp_subnet_2 }} netmask {{ dhcp_netmask_2 }} {
     range {{ dhcp_range_start_2 }} {{ dhcp_range_end_2 }};
     option routers {{ dhcp_router_2 }};
-    option domain-name "domain2.com";
+    option domain-name "ocp-clust.com";
 }
 
-# Subnet for domain3 (e.g., domain3.com):
+# Subnet for ocp-kvm (e.g., ocp-kvm.com):
 subnet {{ dhcp_subnet_3 }} netmask {{ dhcp_netmask_3 }} {
     range {{ dhcp_range_start_3 }} {{ dhcp_range_end_3 }};
     option routers {{ dhcp_router_3 }};
-    option domain-name "domain3.com";
+    option domain-name "ocp-kvm.com";
 }
 
-# Subnet for domain4 (e.g., domain4.com):
+# Subnet for ocp-cicd (e.g., ocp-cicd.com):
 subnet {{ dhcp_subnet_4 }} netmask {{ dhcp_netmask_4 }} {
     range {{ dhcp_range_start_4 }} {{ dhcp_range_end_4 }};
     option routers {{ dhcp_router_4 }};
-    option domain-name "domain4.com";
+    option domain-name "ocp-cicd.com";
 }
 
 # Static host assignments (applies to the machines you gave):

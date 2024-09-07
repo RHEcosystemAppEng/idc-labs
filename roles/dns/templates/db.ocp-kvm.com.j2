@@ -1,7 +1,7 @@
-# roles/dns/templates/db.domain4.com.j2
+# roles/dns/templates/db.ocp-kvm.com.j2
 
 $TTL 604800     ; Default Time To Live
-@       IN      SOA     ns1.domain4.com. admin.domain4.com. (
+@       IN      SOA     ns1.ocp-kvm.com. admin.ocp-kvm.com. (
               3           ; Serial
          604800           ; Refresh
           86400           ; Retry
@@ -9,9 +9,9 @@ $TTL 604800     ; Default Time To Live
          604800 )         ; Negative Cache TTL
 ;
 ; Name servers
-@       IN      NS      ns1.domain4.com.
+@       IN      NS      ns1.ocp-kvm.com.
 
-; A records for domain4.com
+; A records for ocp-kvm.com
 ns1     IN  A   {{ dns_ip_address }}
-host1   IN  A   10.10.10.101  ; Just an example
+host1   IN  A   192.168.10.101  ; Just an example
 ; Add other necessary DNS records for the zone

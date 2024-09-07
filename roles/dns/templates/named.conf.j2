@@ -23,28 +23,28 @@ zone "." IN {
     file "named.ca";
 };
 
-# Forward zone for domain1.com
-zone "{{ domain1_forward_zone }}" IN {
+# Forward zone for lab.com
+zone "{{ lab_forward_zone }}" IN {
     type master;
-    file "db.{{ domain1_forward_zone }}";
+    file "db.{{ lab_forward_zone }}";
 };
 
-# Forward zone for domain2.com
-zone "{{ domain2_forward_zone }}" IN {
+# Forward zone for ocp-clust.com
+zone "{{ ocp-clust_forward_zone }}" IN {
     type master;
-    file "db.{{ domain2_forward_zone }}";
+    file "db.{{ ocp-clust_forward_zone }}";
 };
 
-# Forward zone for domain3.com
-zone "{{ domain3_forward_zone }}" IN {
+# Forward zone for ocp-kvm.com
+zone "{{ ocp-kvm_forward_zone }}" IN {
     type master;
-    file "db.{{ domain3_forward_zone }}";
+    file "db.{{ ocp-kvm_forward_zone }}";
 };
 
-# Forward zone for domain4.com
-zone "{{ domain4_forward_zone }}" IN {
+# Forward zone for ocp-cicd.com
+zone "{{ ocp-cicd_forward_zone }}" IN {
     type master;
-    file "db.{{ domain4_forward_zone }}";
+    file "db.{{ ocp-cicd_forward_zone }}";
 };
 
 # Reverse zone

@@ -1,4 +1,4 @@
-# roles/dns/templates/db.10.10.10.j2
+# roles/dns/templates/db.192.168.10.j2
 
 $TTL    604800
 @       IN      SOA     {{ dns_server_name }}. admin.{{ dns_forward_zone }}. (
@@ -8,14 +8,14 @@ $TTL    604800
         2419200         ; Expire
          604800 )       ; Negative Cache TTL
 ;
-; PTR records for domain1.com
-100     IN  PTR host1.domain1.com.
+; PTR records for lab.com
+100     IN  PTR host1.lab.com.
 
-; PTR records for domain2.com
-160     IN  PTR host2.domain2.com.
+; PTR records for ocp-clust.com
+160     IN  PTR host2.ocp-clust.com.
 
-; PTR records for domain3.com
-176     IN  PTR host3.domain3.com.
+; PTR records for ocp-kvm.com
+176     IN  PTR host3.ocp-kvm.com.
 
-; PTR records for domain4.com
-191     IN  PTR host4.domain4.com.
+; PTR records for ocp-cicd.com
+191     IN  PTR host4.ocp-cicd.com.

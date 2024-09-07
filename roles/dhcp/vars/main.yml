@@ -33,9 +33,10 @@ dhcp_router_4: "192.168.10.192"
 # Static mappings
 dhcp_static_mappings:
   - { name: 'infra', mac: '6c:fe:54:4a:ea:21', ip: '192.168.10.2' }
-  - { name: 'ntp01', mac: '10:70:fd:26:4f:d2', ip: '192.168.10.5' }
-  - { name: 'ocp-master01', mac: '10:70:fd:26:50:52', ip: '192.168.10.6' }
-  - { name: 'ocp-master02', mac: '10:70:fd:26:4e:12', ip: '192.168.10.7' }
-  - { name: 'ocp-master03', mac: '10:70:fd:26:49:72', ip: '192.168.10.8' }
-  - { name: 'ocp-worker01', mac: '6c:fe:54:4a:e9:81', ip: '192.168.10.3' }
+  - { name: 'idclab647', mac: '10:70:fd:26:4f:d2', ip: '192.168.10.5' }
+  - { name: 'idclab648', mac: '10:70:fd:26:50:52', ip: '192.168.10.6' }
+  - { name: 'idclab649', mac: '10:70:fd:26:4e:12', ip: '192.168.10.7' }
+  - { name: 'idclab650', mac: '10:70:fd:26:49:72', ip: '192.168.10.8' }
+  - { name: 'idclab484', mac: '6c:fe:54:4a:e9:81', ip: '192.168.10.3' }
+  - { name: 'idclab479', mac: 'b8:3f:d2:4a:56:de', ip: '192.168.10.4' }
   # Other static mappings...

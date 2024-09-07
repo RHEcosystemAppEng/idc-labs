@@ -1,7 +1,7 @@
 # roles/dns/templates/db.ocp-cicd.com.j2
 
 $TTL 604800     ; Default Time To Live
-@       IN      SOA     ns1.ocp-cicd.com. admin.ocp-cicd.com. (
+@       IN      SOA     infra.lab.com. admin.ocp-cicd.com. (
               3           ; Serial
          604800           ; Refresh
           86400           ; Retry
@@ -9,9 +9,9 @@ $TTL 604800     ; Default Time To Live
          604800 )         ; Negative Cache TTL
 ;
 ; Name servers
-@       IN      NS      ns1.ocp-cicd.com.
+@       IN      NS      infra.lab.com.
 
 ; A records for ocp-cicd.com
-ns1     IN  A   {{ dns_ip_address }}
+infra     IN  A   {{ dns_ip_address }}
 host1   IN  A   192.168.10.101  ; Just an example
 ; Add other necessary DNS records for the zone

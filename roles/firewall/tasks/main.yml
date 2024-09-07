@@ -1,0 +1,12 @@
+# roles/firewall/tasks/main.yml
+- name: Configure Firewall for required services
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    state: enabled
+    immediate: true
+    permanent: true
+  with_items:
+    - dhcp
+    - dns
+    - ntp
+  notify: reload firewalld

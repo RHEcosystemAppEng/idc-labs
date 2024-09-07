@@ -1,0 +1,18 @@
+# playbooks/tasks/finalize_setup.yml
+- name: Restart networking services and reload daemons
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - network
+    - NetworkManager
+    - firewalld
+
+- name: Final Status Check
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - dhcpd
+    - named
+    - chronyd

@@ -1,0 +1,6 @@
+# roles/ntp/handlers/main.yml
+- name: restart chronyd
+  ansible.builtin.service:
+    name: chronyd
+    state: restarted
+    enabled: yes

@@ -1,0 +1,36 @@
+# roles/dns/tasks/main.yml
+- name: Install BIND DNS Server
+  ansible.builtin.yum:
+    name: bind
+    state: present
+  notify: restart named
+
+- name: Configure Named Service
+  ansible.builtin.template:
+    src: named.conf.j2
+    dest: /etc/named/named.conf
+    owner: root
+    group: named
+    mode: '0644'
+  notify: restart named
+
+- name: Configure Reverse DNS Zone
+  ansible.builtin.template:
+    src: db.{{ dns_reverse_zone }}.j2
+    dest: "/var/named/db.{{ dns_reverse_zone }}"
+    owner: root
+    group: named
+    mode: '0644'
+  notify: restart named
+
+- name: Configure Forward DNS Zone
+  ansible.builtin.template:
+    src: db.{{ dns_forward_zone }}.j2
+    dest: "/var/named/db.{{ dns_forward_zone }}"
+    owner: root
+    group: named
+    mode: '0644'
+  notify: restart named
+
+- name: Include verify tasks
+  ansible.builtin.include_tasks: verify.yml

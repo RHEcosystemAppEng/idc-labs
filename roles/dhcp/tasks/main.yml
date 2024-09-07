@@ -1,0 +1,21 @@
+---
+# roles/dhcp/tasks/main.yml
+- name: Install ISC DHCP Server
+  ansible.builtin.yum:
+    name: dhcp-server
+    state: present
+  notify: restart dhcpd
+
+- name: Configure ISC DHCP Server
+  ansible.builtin.template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart dhcpd
+
+- name: Include verify tasks
+  ansible.builtin.include_tasks:
+    file: verify.yml

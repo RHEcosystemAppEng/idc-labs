@@ -1,0 +1,10 @@
+# roles/dhcp/tasks/verify.yml
+- name: Ensure the DHCP service is running
+  ansible.builtin.service_facts:
+
+- name: Validate DHCP service status
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.services['dhcpd'].state == "running"
+    fail_msg: "DHCP service is not running!"
+    success_msg: "DHCP service is running."

@@ -1,0 +1,6 @@
+# roles/dhcp/handlers/main.yml
+- name: Restart dhcpd
+  ansible.builtin.service:
+    name: dhcpd
+    state: restarted
+    enabled: true

@@ -1,0 +1,10 @@
+# roles/dns/tasks/verify.yml
+- name: Ensure the DNS service is running
+  ansible.builtin.service_facts:
+
+- name: Validate DNS service status
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.services['named'].state == "running"
+    fail_msg: "DNS service is not running!"
+    success_msg: "DNS service is running."

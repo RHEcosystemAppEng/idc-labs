@@ -1,0 +1,37 @@
+# roles/dhcp/vars/main.yml
+dhcp_common_dns: "10.10.10.8"
+dhcp_common_ntp: "10.10.10.8"
+
+# Subnet 1 (domain1.com)
+dhcp_subnet_1: "10.10.10.0"
+dhcp_netmask_1: "255.255.255.0"
+dhcp_range_start_1: "10.10.10.100"
+dhcp_range_end_1: "10.10.10.150"
+dhcp_router_1: "10.10.10.1"
+
+# Subnet 2 (domain2.com)
+dhcp_subnet_2: "10.10.10.0"
+dhcp_netmask_2: "255.255.255.240"
+dhcp_range_start_2: "10.10.10.160"
+dhcp_range_end_2: "10.10.10.175"
+dhcp_router_2: "10.10.10.161"
+
+# Subnet 3 (domain3.com)
+dhcp_subnet_3: "10.10.10.0"
+dhcp_netmask_3: "255.255.255.240"
+dhcp_range_start_3: "10.10.10.176"
+dhcp_range_end_3: "10.10.10.190"
+dhcp_router_3: "10.10.10.177"
+
+# Subnet 4 (domain4.com)
+dhcp_subnet_4: "10.10.10.0"
+dhcp_netmask_4: "255.255.255.240"
+dhcp_range_start_4: "10.10.10.191"
+dhcp_range_end_4: "10.10.10.200"
+dhcp_router_4: "10.10.10.192"
+
+# Static mappings
+dhcp_static_mappings:
+  - { name: 'b5r10u39', mac: 'a4:bf:01:57:14:10', ip: '10.10.10.22' }
+  - { name: 'b5r10u37', mac: 'a4:bf:01:4f:2f:2e', ip: '10.10.10.8' }
+  # Other static mappings...

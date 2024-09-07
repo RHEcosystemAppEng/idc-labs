@@ -1,0 +1,17 @@
+# roles/dns/templates/db.domain2.com.j2
+
+$TTL 604800     ; Default Time To Live
+@       IN      SOA     ns1.domain2.com. admin.domain2.com. (
+              3           ; Serial
+         604800           ; Refresh
+          86400           ; Retry
+        2419200           ; Expire
+         604800 )         ; Negative Cache TTL
+;
+; Name servers
+@       IN      NS      ns1.domain2.com.
+
+; A records for domain2.com
+ns1     IN  A   {{ dns_ip_address }}
+host1   IN  A   10.10.10.101  ; Just an example
+; Add other necessary DNS records for the zone

@@ -1,0 +1,17 @@
+# playbooks/main.yml
+- name: Set up Intel User Lab Infrastructure
+  hosts: localhost
+  become: true
+  vars:
+    dns_server_name: "dns01.lab.com"
+    dns_ip_address: "10.10.10.8"
+    dns_network_range: "10.10.10.0/24"
+    ntp_allow_range: "10.10.10.0/24"
+
+  roles:
+    - dhcp
+    - dns
+    - ntp
+    - firewall
+    - network_config
+    - hosts_updater

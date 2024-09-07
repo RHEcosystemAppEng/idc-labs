@@ -1,0 +1,15 @@
+# roles/ntp/tasks/main.yml
+- name: Install Chrony
+  ansible.builtin.yum:
+    name: chrony
+    state: present
+  notify: restart chronyd
+
+- name: Configure Chrony
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart chronyd

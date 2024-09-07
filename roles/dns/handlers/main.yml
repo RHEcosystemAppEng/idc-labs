@@ -1,0 +1,6 @@
+# roles/dns/handlers/main.yml
+- name: Restart Named
+  ansible.builtin.service:
+    name: named
+    state: restarted
+    enabled: true

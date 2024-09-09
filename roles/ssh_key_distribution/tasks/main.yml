@@ -1,0 +1,21 @@
+# roles/ssh_key_distribution/tasks/main.yml
+
+# 1. Ensure the .ssh directory exists for the specified user
+- name: Ensure .ssh directory exists for user '{{ ssh_user }}'
+  ansible.builtin.file:
+    path: "/home/{{ ssh_user }}/.ssh"
+    state: directory
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: '0700'
+
+# 2. Copy the ansible public SSH key to the remote user's authorized_keys
+- name: Deploy the SSH public key to '{{ ssh_user }}' .ssh/authorized_keys
+  ansible.builtin.copy:
+    src: "/home/{{ ansible_user }}/.ssh/ansible_ed25519.pub"  # Modify as needed based on your control node SSH path
+    dest: "/home/{{ ssh_user }}/.ssh/authorized_keys"
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+    mode: '0600'
+    remote_src: no
+    append: yes  # Ensure we append the key rather than overwrite

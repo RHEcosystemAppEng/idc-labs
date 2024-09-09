@@ -1,0 +1,25 @@
+# playbooks/set_hostname.yml
+
+- name: Set the hostname for each host
+  hosts: all
+  become: true
+
+  tasks:
+    # Verify current hostname
+    - name: Get the current hostname
+      ansible.builtin.command: hostname
+      register: current_hostname
+
+    - name: Set the hostname if needed
+      ansible.builtin.hostname:
+        name: "{{ desired_hostname }}"
+      when: current_hostname.stdout != desired_hostname
+
+    # Optional: Configure /etc/hosts with the new hostname
+    - name: Ensure /etc/hosts is updated with the new hostname
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        regexp: "^{{ static_ip }}\\\\s+{{ desired_hostname }}\\\\b"
+        line: "{{ static_ip }} {{ desired_hostname }}"
+        state: present
+        create: yes

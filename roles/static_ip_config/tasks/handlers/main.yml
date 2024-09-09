@@ -1,0 +1,6 @@
+# roles/static_ip_config/handlers/main.yml
+
+- name: restart_network
+  ansible.builtin.service:
+    name: NetworkManager
+    state: restarted

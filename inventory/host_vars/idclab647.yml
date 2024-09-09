@@ -1,0 +1,9 @@
+# inventory/host_vars/idclab647.yml
+
+# This is specific to the host b5r10u37
+static_ip: "192.168.10.165"
+netmask: "255.255.255.240"
+gateway: "192.168.10.1"
+dns1: "192.168.10.2"
+desired_hostname: "idclab647.clust.lab.com"
+ssh_user: "sdp"

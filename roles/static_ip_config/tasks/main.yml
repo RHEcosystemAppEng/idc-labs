@@ -1,0 +1,28 @@
+# roles/static_ip_config/tasks/main.yml
+
+# 1. Identify the default active network interface used for routing
+- name: Get the active default network interface
+  ansible.builtin.shell: "ip route | grep default | awk '{print $5}'"
+  register: active_interface
+
+- name: Set active interface as fact
+  set_fact:
+    interface: "{{ active_interface.stdout.strip() }}"
+
+# 2. Configure the active network interface with static IP
+# This updates the interface's configuration files (Fedora/CentOS-style)
+- name: Configure {{ interface }} with static IP settings
+  ansible.builtin.copy:
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ interface }}"
+    content: |
+      TYPE=Ethernet
+      BOOTPROTO=static
+      NAME={{ interface }}
+      DEVICE={{ interface }}
+      ONBOOT=yes
+      IPADDR={{ static_ip }}
+      NETMASK={{ netmask }}
+      GATEWAY={{ gateway }}
+      DNS1={{ dns1 }}
+      DNS2={{ dns2 }}
+  notify: restart_network

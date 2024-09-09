@@ -1,0 +1,4 @@
+# roles/user_setup/vars/main.yml
+
+# Default User for Setup (Can be overridden in the playbook or inventory if necessary)
+user_name: "sdp"

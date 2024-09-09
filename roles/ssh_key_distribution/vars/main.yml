@@ -1,0 +1,5 @@
+# roles/ssh_key_distribution/vars/main.yml
+
+# Default SSH key to append to remote authorized_keys
+ssh_user: "sdp"  # Default user for distributing the SSH key (you can override via host_vars)
+ssh_public_key: "/home/{{ ansible_user }}/.ssh/ansible_ed25519.pub"

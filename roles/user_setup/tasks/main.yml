@@ -1,0 +1,22 @@
+# roles/user_setup/tasks/main.yml
+
+# 1. Create the user "sdp"
+- name: Ensure user 'sdp' exists
+  ansible.builtin.user:
+    name: sdp
+    groups:
+      - sudo
+      - adm
+    append: yes
+    state: present
+    shell: /bin/bash
+
+# 2. Enable passwordless sudo for user 'sdp'
+- name: Configure sudo without password for user 'sdp'
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/99_sdp"
+    content: |
+      sdp ALL=(ALL) NOPASSWD:ALL
+    mode: 0440
+    owner: root
+    group: root

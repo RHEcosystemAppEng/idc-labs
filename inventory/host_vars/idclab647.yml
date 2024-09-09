@@ -7,3 +7,10 @@ gateway: "192.168.10.1"
 dns1: "192.168.10.2"
 desired_hostname: "idclab647.clust.lab.com"
 ssh_user: "sdp"
+
+idclab647 ansible_host=192.168.10.5 ansible_user=devcloud
+idclab648 ansible_host=192.168.10.6 ansible_user=devcloud
+idclab649 ansible_host=192.168.10.7 ansible_user=devcloud
+idclab484 ansible_host=192.168.10.3 ansible_user=devcloud
+idclab650 ansible_host=192.168.10.8 ansible_user=devcloud
+idclab479 ansible_host=192.168.10.4 ansible_user=devcloud

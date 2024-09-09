@@ -60,9 +60,9 @@ zone "lab.com" IN {
     file "db.lab.com";
 };
 
-zone "10.10.10.in-addr.arpa" IN {
+zone "192.168.10.in-addr.arpa" IN {
     type master;
-    file "db.10.10.10";
+    file "db.192.168.10";
 };
 
 include "/etc/named.rfc1912.zones";

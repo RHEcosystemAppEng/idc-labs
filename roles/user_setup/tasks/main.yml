@@ -7,9 +7,11 @@
     groups:
       - sudo
       - adm
+      - wheel
     append: yes
     state: present
     shell: /bin/bash
+    create_home: yes
 
 # 2. Enable passwordless sudo for user 'sdp'
 - name: Configure sudo without password for user 'sdp'

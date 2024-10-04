@@ -4,6 +4,7 @@
 - name: Get the active default network interface
   ansible.builtin.shell: "ip route | grep default | awk '{print $5}'"
   register: active_interface
+  tags: interface
 
 - name: Set active interface as fact
   set_fact:
@@ -24,5 +25,5 @@
       NETMASK={{ netmask }}
       GATEWAY={{ gateway }}
       DNS1={{ dns1 }}
-      DNS2={{ dns2 }}
-  notify: restart_network
+      #notify: restart_network
+  tags: interface

@@ -1,0 +1,342 @@
+diff --git a/ansible.cfg b/ansible.cfg
+index 5b3e7ee..ef3bba5 100644
+--- a/ansible.cfg
++++ b/ansible.cfg
+@@ -1,46 +1,46 @@
+ [defaults]
+ # Define the path to your inventory file
+-inventory = ./inventory/hosts.ini
++#inventory = ./inventory/hosts.ini
+ 
+ # Setting the roles path to make sure Ansible can find your roles
+ roles_path = ./roles
+ 
+ # Use persistent connections for faster execution
+-forks = 10  # Adjust to a reasonable number depending on your infrastructure
++#forks = 10  # Adjust to a reasonable number depending on your infrastructure
+ timeout = 30
+ 
+ # Enforce usage of YAML output for better readability.
+ # Feel free to use json if you prefer, although YAML is usually more readable
+-stdout_callback = yaml
++#stdout_callback = yaml
+ 
+ # Logging ensures you can review what happened after a playbook run.
+-log_path = /var/log/ansible/ansible.log
++#log_path = /var/log/ansible/ansible.log
+ 
+ # Determining whether Ansible should ask for privilege escalation password
+-ask_sudo_pass = false
+-remote_user = sdp
+-become = true
+-become_method = sudo
++#ask_sudo_pass = false
++#remote_user = sdp
++#become = true
++#become_method = sudo
+ 
+ # Control verbosity: Use -vvvv for maximum, adjust per need
+ # Adjust this verbosity based on whether you're debugging or running in production.
+ # For production, the default can be left as 0 (basic output).
+-verbosity = 1
++#verbosity = 1
+ 
+ # Ensuring safe boolean syntax (recommended)
+-jinja2_native = True
++#jinja2_native = True
+ 
+ [ssh_connection]
+ # Use ControlPersist to keep SSH connections open for faster repeated connections within a session.
+-control_path = %(directory)s/%%h-%%r
+-pipelining = True
+-control_persist = 60s  # How long to keep connections open
+-ssh_args = -o ControlMaster=auto -o ControlPersist=60s  # Improve SSH performance
++#control_path = %(directory)s/%%h-%%r
++#pipelining = True
++#control_persist = 60s  # How long to keep connections open
++#ssh_args = -o ControlMaster=auto -o ControlPersist=60s  # Improve SSH performance
+ 
+ # Make sure the timeout is adjusted to accommodate network lag or heavy tasks
+-retries = 3
+-timeout = 30
++#retries = 3
++#timeout = 30
+ 
+ [diff]
+ # Show changed lines when files are modified (useful for templating tasks)
+-always = True
+\ No newline at end of file
++#always = True
+diff --git a/inventory/host_vars/idclab479.yml b/inventory/host_vars/idclab479.yml
+index f8ee4e0..6af3b34 100644
+--- a/inventory/host_vars/idclab479.yml
++++ b/inventory/host_vars/idclab479.yml
+@@ -6,4 +6,5 @@ netmask: "255.255.255.240"
+ gateway: "192.168.10.1"
+ dns1: "192.168.10.2"
+ desired_hostname: "idclab479.engg.lab.com"
+-ssh_user: "sdp"
+\ No newline at end of file
++ssh_user: "sdp"
++ansible_become_pass: "Tae:pi0f"
+diff --git a/inventory/hosts.ini b/inventory/hosts.ini
+index 12190be..4d6e68c 100644
+--- a/inventory/hosts.ini
++++ b/inventory/hosts.ini
+@@ -1,11 +1,11 @@
+ # inventory/hosts.ini
+ [primary_server]
+-infra ansible_host=192.168.10.2 ansible_user=sdp
++192.168.10.2 static_ip=192.168.10.2 
+ 
+ [servers]
+-idclab647 ansible_host=192.168.10.165
+-idclab648 ansible_host=192.168.10.166
+-idclab649 ansible_host=192.168.10.177
+-idclab484 ansible_host=192.168.10.178
+-idclab650 ansible_host=192.168.10.198
+-idclab479 ansible_host=192.168.10.104
++192.168.10.165 static_ip=192.168.10.165
++192.168.10.166 static_ip=192.168.10.166
++192.168.10.177 static_ip=192.168.10.177
++192.168.10.178 static_ip=192.168.10.178
++192.168.10.198 static_ip=192.168.10.198
++192.168.10.104 static_ip=192.168.10.104
+diff --git a/inventory/old_hosts.ini b/inventory/old_hosts.ini
+index 8c06d44..c005676 100644
+--- a/inventory/old_hosts.ini
++++ b/inventory/old_hosts.ini
+@@ -1,11 +1,16 @@
+-[primary_server]
+-infra ansible_host=192.168.10.2 ansible_user=devcloud
++[infra]
++192.168.10.2 ansible_user="devcloud" desired_hostname="infra" static_ip=192.168.10.2 netmask=255.255.255.0 gateway=192.168.10.1 dns1=192.168.10.2
++
++[infra:vars]
++ansible_sudo_pass="devcloud"
+ 
+-# SNO and RHEL Servers
+ [servers]
+-192.168.10.5 ansible_user=devcloud
+-192.168.10.6 ansible_user=devcloud
+-192.168.10.7 ansible_user=devcloud
+-192.168.10.3 ansible_user=devcloud
+-192.168.10.8 ansible_user=devcloud
+-192.168.10.4 ansible_user=devcloud
+\ No newline at end of file
++192.168.10.5 ansible_user="devcloud" desired_hostname="idclab647" static_ip=192.168.10.165 netmask=255.255.255.240 gateway=192.168.10.1 dns1=192.168.10.2
++192.168.10.6 ansible_user="devcloud" desired_hostname="idclab648" static_ip=192.168.10.166 netmask=255.255.255.240 gateway=192.168.10.1 dns1=192.168.10.2
++192.168.10.7 ansible_user="devcloud" desired_hostname="idclab649" static_ip=192.168.10.177 netmask=255.255.255.240 gateway=192.168.10.1 dns1=192.168.10.2
++192.168.10.3 ansible_user="devcloud" desired_hostname="idclab484" static_ip=192.168.10.178 netmask=255.255.255.240 gateway=192.168.10.1 dns1=192.168.10.2
++192.168.10.8 ansible_user="devcloud" desired_hostname="idclab650" static_ip=192.168.10.198 netmask=255.255.255.240 gateway=192.168.10.1 dns1=192.168.10.2
++192.168.10.4 ansible_user="devcloud" desired_hostname="idclab479" static_ip=192.168.10.104 netmask=255.255.255.0 gateway=192.168.10.1 dns1=192.168.10.2
++
++[servers:vars]
++ansible_sudo_pass="devcloud"
+diff --git a/playbooks/main.yml b/playbooks/main.yml
+index 5d05368..b5090f1 100644
+--- a/playbooks/main.yml
++++ b/playbooks/main.yml
+@@ -1,23 +1,15 @@
++---
+ # playbooks/main.yml
+ - name: Set up Intel User Lab Infrastructure
+-  hosts: localhost
++  hosts: all
+   become: true
+-  vars:
+-    dns_server_name: "infra.lab.com"
+-    dns_ip_address: "192.168.10.2"
+-    dns_network_range: "192.168.10.0/24"
+-    ntp_allow_range: "192.168.10.0/24"
+-
+-    # Variables for SSH key distribution 
+-    ssh_public_key: "/home/{{ ansible_user }}/.ssh/ansible_ed25519.pub"  
+-
+   roles:
+     - static_ip_config
+     - user_setup
+-    - ssh_key_distribution
+     - dhcp
+     - dns
+     - ntp
+     - firewall
+     - network_config
+     - hosts_updater
++
+diff --git a/playbooks/set_hostname.yml b/playbooks/set_hostname.yml
+index b4b1e6a..7cec279 100644
+--- a/playbooks/set_hostname.yml
++++ b/playbooks/set_hostname.yml
+@@ -22,4 +22,4 @@
+         regexp: "^{{ static_ip }}\\\\s+{{ desired_hostname }}\\\\b"
+         line: "{{ static_ip }} {{ desired_hostname }}"
+         state: present
+-        create: yes
+\ No newline at end of file
++        create: yes
+diff --git a/roles/dhcp/vars/main.yml b/roles/dhcp/vars/main.yml
+index c6b9db3..a0bb153 100644
+--- a/roles/dhcp/vars/main.yml
++++ b/roles/dhcp/vars/main.yml
+@@ -2,33 +2,37 @@
+ dhcp_common_dns: "192.168.10.2"
+ dhcp_common_ntp: "192.168.10.2"
+ 
+-# Subnet 1 (lab.com)
++# Subnet 1 (engg.lab.com)
+ dhcp_subnet_1: "192.168.10.0"
+ dhcp_netmask_1: "255.255.255.0"
+ dhcp_range_start_1: "192.168.10.100"
+ dhcp_range_end_1: "192.168.10.150"
+ dhcp_router_1: "192.168.10.1"
++dhcp_domain_1: "engg.lab.com"
+ 
+-# Subnet 2 (ocp-clust.com)
++# Subnet 2 (clust.lab.com)
+ dhcp_subnet_2: "192.168.10.0"
+-dhcp_netmask_2: "255.255.255.240"
++dhcp_netmask_2: "255.255.255.0"
+ dhcp_range_start_2: "192.168.10.160"
+ dhcp_range_end_2: "192.168.10.175"
+ dhcp_router_2: "192.168.10.161"
++dhcp_domain_2: "clust.lab.com"
+ 
+-# Subnet 3 (ocp-kvm.com)
++# Subnet 3 (kvm.lab.com)
+ dhcp_subnet_3: "192.168.10.0"
+-dhcp_netmask_3: "255.255.255.240"
++dhcp_netmask_3: "255.255.255.0"
+ dhcp_range_start_3: "192.168.10.176"
+ dhcp_range_end_3: "192.168.10.190"
+ dhcp_router_3: "192.168.10.177"
++dhcp_domain_3: "kvm.lab.com"
+ 
+-# Subnet 4 (ocp-cicd.com)
++# Subnet 4 (cicd.lab.com)
+ dhcp_subnet_4: "192.168.10.0"
+-dhcp_netmask_4: "255.255.255.240"
++dhcp_netmask_4: "255.255.255.0"
+ dhcp_range_start_4: "192.168.10.191"
+ dhcp_range_end_4: "192.168.10.200"
+ dhcp_router_4: "192.168.10.192"
++dhcp_domain_4: "cicd.lab.com"
+ 
+ # Static mappings
+ dhcp_static_mappings:
+@@ -40,3 +44,4 @@ dhcp_static_mappings:
+   - { name: 'idclab650', mac: '10:70:fd:26:49:72', ip: '192.168.10.198' }
+   - { name: 'idclab479', mac: 'b8:3f:d2:4a:56:de', ip: '192.168.10.104' }
+   # Other static mappings...
++
+diff --git a/roles/dns/templates/db.lab.com.j2 b/roles/dns/templates/db.lab.com.j2
+index 7ba4478..9b8806d 100644
+--- a/roles/dns/templates/db.lab.com.j2
++++ b/roles/dns/templates/db.lab.com.j2
+@@ -28,23 +28,23 @@ idclab484.kvm   IN  A    192.168.10.178
+ 
+ ; A records for ocp.cicd.com
+ api.cicd        IN  A    192.168.10.198
+-api.cicd-int    IN  A    192.168.10.198
++api.int-cicd    IN  A    192.168.10.198
+ *.apps.ocp.cicd IN  A    192.168.10.198
+ 
+ ; A records for ocp.engg.com
+ api.engg        IN  A    192.168.10.104
+-api.engg-int    IN  A    192.168.10.104
++api.int-engg    IN  A    192.168.10.104
+ *.apps.ocp.engg IN  A    192.168.10.104
+ 
+ ; A records for ocp.clust.com
+ api.clust       IN  A    192.168.10.165
+-api.clust-int   IN  A    192.168.10.165
++api.int-clust   IN  A    192.168.10.165
+ *.apps.ocp.clust IN  A    192.168.10.165
+ 
+ ; A records for ocp.kvm.com
+ api.kvm         IN  A    192.168.10.177
+-api.kvm-int     IN  A    192.168.10.177
++api.int-kvm     IN  A    192.168.10.177
+ *.apps.ocp.kvm  IN  A    192.168.10.177
+ 
+ 
+-; Add other necessary DNS records for the zone
+\ No newline at end of file
++; Add other necessary DNS records for the zone
+diff --git a/roles/dns/templates/named.conf.j2 b/roles/dns/templates/named.conf.j2
+index 888a2e0..7a93e58 100644
+--- a/roles/dns/templates/named.conf.j2
++++ b/roles/dns/templates/named.conf.j2
+@@ -29,7 +29,7 @@ options {
+            attacks. Implementing BCP38 within your network would greatly
+            reduce such attack surface
+         */
+-        recursion no;
++        recursion yes;
+ 
+         dnssec-validation no;
+ 
+@@ -66,4 +66,4 @@ zone "192.168.10.in-addr.arpa" IN {
+ };
+ 
+ include "/etc/named.rfc1912.zones";
+-include "/etc/named.root.key";
+\ No newline at end of file
++include "/etc/named.root.key";
+diff --git a/roles/static_ip_config/tasks/handlers/main.yml b/roles/static_ip_config/tasks/handlers/main.yml
+deleted file mode 100644
+index 75ac469..0000000
+--- a/roles/static_ip_config/tasks/handlers/main.yml
++++ /dev/null
+@@ -1,6 +0,0 @@
+-# roles/static_ip_config/handlers/main.yml
+-
+-- name: restart_network
+-  ansible.builtin.service:
+-    name: NetworkManager
+-    state: restarted
+\ No newline at end of file
+diff --git a/roles/static_ip_config/tasks/main.yml b/roles/static_ip_config/tasks/main.yml
+index 0b88444..0d82052 100644
+--- a/roles/static_ip_config/tasks/main.yml
++++ b/roles/static_ip_config/tasks/main.yml
+@@ -4,6 +4,7 @@
+ - name: Get the active default network interface
+   ansible.builtin.shell: "ip route | grep default | awk '{print $5}'"
+   register: active_interface
++  tags: interface
+ 
+ - name: Set active interface as fact
+   set_fact:
+@@ -24,5 +25,5 @@
+       NETMASK={{ netmask }}
+       GATEWAY={{ gateway }}
+       DNS1={{ dns1 }}
+-      DNS2={{ dns2 }}
+-  notify: restart_network
+\ No newline at end of file
++      #notify: restart_network
++  tags: interface
+diff --git a/roles/user_setup/tasks/main.yml b/roles/user_setup/tasks/main.yml
+index 4227ccd..7004b55 100644
+--- a/roles/user_setup/tasks/main.yml
++++ b/roles/user_setup/tasks/main.yml
+@@ -7,9 +7,11 @@
+     groups:
+       - sudo
+       - adm
++      - wheel
+     append: yes
+     state: present
+     shell: /bin/bash
++    create_home: yes
+ 
+ # 2. Enable passwordless sudo for user 'sdp'
+ - name: Configure sudo without password for user 'sdp'
+@@ -19,4 +21,4 @@
+       sdp ALL=(ALL) NOPASSWD:ALL
+     mode: 0440
+     owner: root
+-    group: root
+\ No newline at end of file
++    group: root

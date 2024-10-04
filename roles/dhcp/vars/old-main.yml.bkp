@@ -2,37 +2,33 @@
 dhcp_common_dns: "192.168.10.2"
 dhcp_common_ntp: "192.168.10.2"
 
-# Subnet 1 (engg.lab.com)
+# Subnet 1 (lab.com)
 dhcp_subnet_1: "192.168.10.0"
 dhcp_netmask_1: "255.255.255.0"
 dhcp_range_start_1: "192.168.10.100"
 dhcp_range_end_1: "192.168.10.150"
 dhcp_router_1: "192.168.10.1"
-dhcp_domain_1: "engg.lab.com"
 
-# Subnet 2 (clust.lab.com)
+# Subnet 2 (ocp-clust.com)
 dhcp_subnet_2: "192.168.10.0"
-dhcp_netmask_2: "255.255.255.0"
+dhcp_netmask_2: "255.255.255.240"
 dhcp_range_start_2: "192.168.10.160"
 dhcp_range_end_2: "192.168.10.175"
 dhcp_router_2: "192.168.10.161"
-dhcp_domain_2: "clust.lab.com"
 
-# Subnet 3 (kvm.lab.com)
+# Subnet 3 (ocp-kvm.com)
 dhcp_subnet_3: "192.168.10.0"
-dhcp_netmask_3: "255.255.255.0"
+dhcp_netmask_3: "255.255.255.240"
 dhcp_range_start_3: "192.168.10.176"
 dhcp_range_end_3: "192.168.10.190"
 dhcp_router_3: "192.168.10.177"
-dhcp_domain_3: "kvm.lab.com"
 
-# Subnet 4 (cicd.lab.com)
+# Subnet 4 (ocp-cicd.com)
 dhcp_subnet_4: "192.168.10.0"
-dhcp_netmask_4: "255.255.255.0"
+dhcp_netmask_4: "255.255.255.240"
 dhcp_range_start_4: "192.168.10.191"
 dhcp_range_end_4: "192.168.10.200"
 dhcp_router_4: "192.168.10.192"
-dhcp_domain_4: "cicd.lab.com"
 
 # Static mappings
 dhcp_static_mappings:
@@ -44,4 +40,3 @@ dhcp_static_mappings:
   - { name: 'idclab650', mac: '10:70:fd:26:49:72', ip: '192.168.10.198' }
   - { name: 'idclab479', mac: 'b8:3f:d2:4a:56:de', ip: '192.168.10.104' }
   # Other static mappings...
-

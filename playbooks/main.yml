@@ -1,23 +1,15 @@
+---
 # playbooks/main.yml
 - name: Set up Intel User Lab Infrastructure
-  hosts: localhost
+  hosts: all
   become: true
-  vars:
-    dns_server_name: "infra.lab.com"
-    dns_ip_address: "192.168.10.2"
-    dns_network_range: "192.168.10.0/24"
-    ntp_allow_range: "192.168.10.0/24"
-
-    # Variables for SSH key distribution 
-    ssh_public_key: "/home/{{ ansible_user }}/.ssh/ansible_ed25519.pub"  
-
   roles:
     - static_ip_config
     - user_setup
-    - ssh_key_distribution
     - dhcp
     - dns
     - ntp
     - firewall
     - network_config
     - hosts_updater
+

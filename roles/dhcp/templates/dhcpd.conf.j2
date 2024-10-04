@@ -10,7 +10,7 @@ authoritative;
 
 # Each subnet block defines a distinct domain's scope.
 
-# Subnet for lab (e.g., lab.com):
+# Subnet for engg (e.g., engg.lab.com):
 subnet {{ dhcp_subnet_1 }} netmask {{ dhcp_netmask_1 }} {
     range {{ dhcp_range_start_1 }} {{ dhcp_range_end_1 }};
     option routers {{ dhcp_router_1 }};
